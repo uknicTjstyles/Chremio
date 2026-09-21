@@ -1,21 +1,30 @@
 @import "tailwindcss";
 
+/* Chremio dark theme */
 @theme {
-  --color-midnight: #0b1220;
-    --color-evergreen: #10b981;
-      --color-mint: #6ee7b7;
-        --color-ink: #334155;
-          --color-cloud: #e5e7eb;
-            --color-ivory: #fafaf9;
-            }
+  --color-canvas: #0b1220; /* page background (brand Midnight) */
+    --color-sidebar: #080e1a;
+      --color-surface: #111b2e; /* cards */
+        --color-surface-2: #182339; /* inputs, hover, tracks */
+          --color-line: #243247; /* borders and dividers */
+            --color-fg: #f1f5f9; /* main text */
+              --color-muted: #94a3b8; /* secondary text */
+                --color-evergreen: #10b981;
+                  --color-mint: #6ee7b7;
+                    --color-danger: #f87171; /* spending / errors */
+                    }
 
-            @theme inline {
-              --font-heading: var(--font-sora), sans-serif;
-                --font-body: var(--font-inter), sans-serif;
-                }
+                    @theme inline {
+                      --font-heading: var(--font-sora), sans-serif;
+                        --font-body: var(--font-inter), sans-serif;
+                        }
 
-                body {
-                  background: var(--color-ivory);
-                    color: var(--color-ink);
-                      font-family: var(--font-body);
-                      }
+                        html {
+                          color-scheme: dark; /* dark date pickers, dropdowns and scrollbars */
+                          }
+
+                          body {
+                            background: var(--color-canvas);
+                              color: var(--color-fg);
+                                font-family: var(--font-body);
+                                }

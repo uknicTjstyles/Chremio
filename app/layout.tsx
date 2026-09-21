@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Sora } from "next/font/google";
 import "./globals.css";
 
@@ -10,14 +10,19 @@ export const metadata: Metadata = {
     description: "Manage your money. Build your future.",
     };
 
-    export default function RootLayout({
-      children,
-      }: {
-        children: React.ReactNode;
-        }) {
-          return (
-              <html lang="en" className={`${sora.variable} ${inter.variable}`}>
-                    <body>{children}</body>
-                        </html>
-                          );
-                          }
+    export const viewport: Viewport = {
+      themeColor: "#0B1220",
+        colorScheme: "dark",
+        };
+
+        export default function RootLayout({
+          children,
+          }: {
+            children: React.ReactNode;
+            }) {
+              return (
+                  <html lang="en" className={`${sora.variable} ${inter.variable}`}>
+                        <body>{children}</body>
+                            </html>
+                              );
+                              }

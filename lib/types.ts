@@ -4,5 +4,5 @@ export type Tx = {
           amount: number;
             category: string;
               description: string;
-                date: string; // ISO string
+                date: string; 
                 };
