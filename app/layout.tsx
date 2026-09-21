@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Sora } from "next/font/google";
+import NavigationProgress from "@/components/NavigationProgress";
+import Toaster from "@/components/Toaster";
 import "./globals.css";
 
 const sora = Sora({ subsets: ["latin"], variable: "--font-sora" });
@@ -22,7 +24,11 @@ export const metadata: Metadata = {
             }) {
               return (
                   <html lang="en" className={`${sora.variable} ${inter.variable}`}>
-                        <body>{children}</body>
-                            </html>
-                              );
-                              }
+                        <body>
+                                <NavigationProgress />
+                                        {children}
+                                                <Toaster />
+                                                      </body>
+                                                          </html>
+                                                            );
+                                                            }

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
 import { connectDB } from "@/lib/mongodb";
-import { createSession, getSession } from "@/lib/session";
+import { createSession, destroySession, getSession } from "@/lib/session";
+import Transaction from "@/models/Transaction";
 import User from "@/models/User";
 
 export async function PATCH(req: Request) {
@@ -37,3 +39,35 @@ export async function PATCH(req: Request) {
 
                                                                                     return NextResponse.json({ ok: true, name: user.name });
                                                                                     }
+
+                                                                                    export async function DELETE(req: Request) {
+                                                                                      const session = await getSession();
+                                                                                        if (!session) {
+                                                                                            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+                                                                                              }
+
+                                                                                                const body = await req.json().catch(() => null);
+                                                                                                  const password = String(body?.password ?? "");
+                                                                                                    if (!password) {
+                                                                                                        return NextResponse.json(
+                                                                                                              { error: "Enter your password to confirm." },
+                                                                                                                    { status: 400 }
+                                                                                                                        );
+                                                                                                                          }
+
+                                                                                                                            await connectDB();
+                                                                                                                              const user = await User.findById(session.userId);
+                                                                                                                                const valid = user && (await bcrypt.compare(password, user.passwordHash));
+                                                                                                                                  if (!user || !valid) {
+                                                                                                                                      return NextResponse.json(
+                                                                                                                                            { error: "Your password is incorrect." },
+                                                                                                                                                  { status: 400 }
+                                                                                                                                                      );
+                                                                                                                                                        }
+
+                                                                                                                                                          await Transaction.deleteMany({ userId: session.userId });
+                                                                                                                                                            await User.findByIdAndDelete(session.userId);
+                                                                                                                                                              await destroySession();
+
+                                                                                                                                                                return NextResponse.json({ ok: true });
+                                                                                                                                                                }

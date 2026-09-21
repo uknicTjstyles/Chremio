@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import DeleteAccount from "@/components/DeleteAccount";
 import PasswordForm from "@/components/PasswordForm";
 import ProfileForm from "@/components/ProfileForm";
 import { connectDB } from "@/lib/mongodb";
@@ -44,6 +45,13 @@ export default async function ProfilePage() {
                                                                                                                                                   </h2>
                                                                                                                                                           <PasswordForm />
                                                                                                                                                                 </section>
-                                                                                                                                                                    </div>
-                                                                                                                                                                      );
-                                                                                                                                                                      }
+
+                                                                                                                                                                      <section className="mt-6 rounded-xl border border-danger/30 bg-surface p-5 sm:p-6">
+                                                                                                                                                                              <h2 className="mb-2 font-heading text-lg font-semibold text-danger">
+                                                                                                                                                                                        Delete account
+                                                                                                                                                                                                </h2>
+                                                                                                                                                                                                        <DeleteAccount />
+                                                                                                                                                                                                              </section>
+                                                                                                                                                                                                                  </div>
+                                                                                                                                                                                                                    );
+                                                                                                                                                                                                                    }

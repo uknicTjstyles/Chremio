@@ -2,16 +2,16 @@
 
 /* Chremio dark theme */
 @theme {
-  --color-canvas: #0b1220; /* page background (brand Midnight) */
+  --color-canvas: #0b1220;
     --color-sidebar: #080e1a;
-      --color-surface: #111b2e; /* cards */
-        --color-surface-2: #182339; /* inputs, hover, tracks */
-          --color-line: #243247; /* borders and dividers */
-            --color-fg: #f1f5f9; /* main text */
-              --color-muted: #94a3b8; /* secondary text */
+      --color-surface: #111b2e;
+        --color-surface-2: #182339;
+          --color-line: #243247;
+            --color-fg: #f1f5f9;
+              --color-muted: #94a3b8;
                 --color-evergreen: #10b981;
                   --color-mint: #6ee7b7;
-                    --color-danger: #f87171; /* spending / errors */
+                    --color-danger: #f87171;
                     }
 
                     @theme inline {
@@ -20,7 +20,7 @@
                         }
 
                         html {
-                          color-scheme: dark; /* dark date pickers, dropdowns and scrollbars */
+                          color-scheme: dark;
                           }
 
                           body {
@@ -28,3 +28,17 @@
                               color: var(--color-fg);
                                 font-family: var(--font-body);
                                 }
+
+                                /* Progress bar shown at the top while navigating */
+                                @keyframes nav-progress {
+                                  from {
+                                      width: 0;
+                                        }
+                                          to {
+                                              width: 85%;
+                                                }
+                                                }
+
+                                                .nav-progress {
+                                                  animation: nav-progress 8s cubic-bezier(0.1, 0.6, 0.2, 1) forwards;
+                                                  }

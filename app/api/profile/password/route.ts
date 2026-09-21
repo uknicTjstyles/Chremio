@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { connectDB } from "@/lib/mongodb";
-import { getSession } from "@/lib/session";
+import { destroySession, getSession } from "@/lib/session";
 import User from "@/models/User";
 
 export async function PUT(req: Request) {
@@ -35,5 +35,8 @@ export async function PUT(req: Request) {
                                                                             user.passwordHash = await bcrypt.hash(newPassword, 12);
                                                                               await user.save();
 
-                                                                                return NextResponse.json({ ok: true });
-                                                                                }
+                                                                                // Sign the user out so they log in again with the new password
+                                                                                  await destroySession();
+
+                                                                                    return NextResponse.json({ ok: true });
+                                                                                    }
