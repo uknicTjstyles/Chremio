@@ -1,20 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import logoDark from "../app/logo-for-dark-backgrounds.png";
 
 function Brand({ light = false }: { light?: boolean }) {
   return (
-      <Link href="/" className="inline-flex items-center gap-3">
-            <Image src="/brand/app-icon.png" alt="" width={40} height={40} />
-                  <span
-                          className={`font-heading text-2xl font-semibold ${
-                                    light ? "text-white" : "text-midnight"
-                                            }`}
-                                                  >
-                                                          Chremio
-                                                                </span>
-                                                                    </Link>
-                                                                      );
-                                                                      }
+    <Link href="/" className="inline-flex items-center gap-3">
+      <Image src={logoDark} alt="Chremio logo" width={130} height={130} />
+    </Link>
+  );
+}
 
                                                                       export default function AuthShell({
                                                                         title,

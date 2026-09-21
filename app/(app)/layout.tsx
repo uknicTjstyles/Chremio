@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import LogoutButton from "@/components/LogoutButton";
+import LogoutButton from "@/components/LogOutButton";
 import Sidebar from "@/components/Sidebar";
 import { getSession } from "@/lib/session";
 

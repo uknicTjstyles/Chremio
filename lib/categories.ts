@@ -20,4 +20,3 @@ export const EXPENSE_CATEGORIES = [
                               export const ALL_CATEGORIES = Array.from(
                                 new Set([...EXPENSE_CATEGORIES, ...INCOME_CATEGORIES])
                                 );
-]
