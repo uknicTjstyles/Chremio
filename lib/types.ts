@@ -6,4 +6,3 @@ export type Tx = {
               description: string;
                 date: string; // ISO string
                 };
-}
