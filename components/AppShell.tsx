@@ -13,6 +13,7 @@ const links: { href: string; label: string; icon: IconName }[] = [
   { href: "/dashboard", label: "Dashboard", icon: "dashboard" },
   { href: "/transactions", label: "Transactions", icon: "transactions" },
   { href: "/analytics", label: "Analytics", icon: "analytics" },
+  { href: "/profile", label: "Profile", icon: "profile" },
 ];
 
 function Icon({
