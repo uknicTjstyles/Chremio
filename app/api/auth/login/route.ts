@@ -27,11 +27,11 @@ export async function POST(req: Request) {
                                                           );
                                                             }
 
-                                                              await createSession({
-                                                                  userId: user._id.toString(),
-                                                                      name: user.name,
-                                                                          email: user.email,
-                                                                            });
+                                                              await createSession(
+                                                                    { userId: user._id.toString(), name: user.name, email: user.email },
+                                                                        user.tokenVersion ?? 0
+                                                                          );
+                                                              
 
                                                                               return NextResponse.json({ ok: true });
                                                                               } 

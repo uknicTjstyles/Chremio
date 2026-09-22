@@ -42,11 +42,11 @@ export async function POST(req: Request) {
                                                                                                               const passwordHash = await bcrypt.hash(password, 12);
                                                                                                                 const user = await User.create({ name, email, passwordHash });
 
-                                                                                                                  await createSession({
-                                                                                                                      userId: user._id.toString(),
-                                                                                                                          name: user.name,
-                                                                                                                              email: user.email,
-                                                                                                                                });
+                                                                                                                  await createSession(
+                                                                                                                        { userId: user._id.toString(), name: user.name, email: user.email },
+                                                                                                                            user.tokenVersion ?? 0
+                                                                                                                              );
+                                                                                                                  
 
                                                                                                                                   return NextResponse.json({ ok: true }, { status: 201 });
                                                                                                                                   }

@@ -31,11 +31,11 @@ export async function PATCH(req: Request) {
                                                                 }
 
                                                                   // Refresh the session cookie so the new name shows everywhere
-                                                                    await createSession({
-                                                                        userId: session.userId,
-                                                                            name: user.name,
-                                                                                email: user.email,
-                                                                                  });
+                                                                  await createSession(
+                                                                        { userId: session.userId, name: user.name, email: user.email },
+                                                                            user.tokenVersion ?? 0
+                                                                              );
+                                                                  
 
                                                                                     return NextResponse.json({ ok: true, name: user.name });
                                                                                     }

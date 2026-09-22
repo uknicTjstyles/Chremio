@@ -33,7 +33,9 @@ export async function PUT(req: Request) {
                                                                           }
 
                                                                             user.passwordHash = await bcrypt.hash(newPassword, 12);
-                                                                              await user.save();
+                                                                              // Invalidates every session issued before this moment, on all devices
+                                                                                user.tokenVersion = (user.tokenVersion ?? 0) + 1;
+                                                                                  await user.save();
 
                                                                                 // Sign the user out so they log in again with the new password
                                                                                   await destroySession();

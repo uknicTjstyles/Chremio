@@ -11,9 +11,11 @@ const UserSchema = new Schema(
                                         trim: true,
                                             },
                                                 passwordHash: { type: String, required: true },
-                                                  },
-                                                    { timestamps: true }
-                                                    );
+                                                    // Bumped on every password change to invalidate old sessions
+                                                        tokenVersion: { type: Number, default: 0 },
+                                                          },
+                                                            { timestamps: true }
+                                                            );
 
-                                                    const User = mongoose.models.User || mongoose.model("User", UserSchema);
-                                                    export default User;
+                                                            const User = mongoose.models.User || mongoose.model("User", UserSchema);
+                                                            export default User;

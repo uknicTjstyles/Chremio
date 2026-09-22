@@ -1,8 +1,11 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import { cache } from "react";
+import { connectDB } from "@/lib/mongodb";
+import User from "@/models/User";
 
 const COOKIE_NAME = "chremio_session";
-const MAX_AGE = 60 * 60 * 24 * 7; // 7 days
+const MAX_AGE = 60 * 60 * 24 * 1; // 1 day
 
 export type Session = { userId: string; name: string; email: string };
 
@@ -12,11 +15,12 @@ function getSecret() {
       return new TextEncoder().encode(secret);
       }
 
-      export async function createSession(session: Session) {
-        const token = await new SignJWT({ ...session })
+      // tokenVersion ties the cookie to the user's current password version
+      export async function createSession(session: Session, tokenVersion: number) {
+        const token = await new SignJWT({ ...session, v: tokenVersion })
             .setProtectedHeader({ alg: "HS256" })
                 .setIssuedAt()
-                    .setExpirationTime("7d")
+                    .setExpirationTime("1d")
                         .sign(getSecret());
 
                           const jar = await cookies();
@@ -29,23 +33,38 @@ function getSecret() {
                                                   });
                                                   }
 
-                                                  export async function getSession(): Promise<Session | null> {
+                                                  // cache() means the database check runs once per request, even if the
+                                                  // layout and the page both call getSession()
+                                                  export const getSession = cache(async (): Promise<Session | null> => {
                                                     const jar = await cookies();
                                                       const token = jar.get(COOKIE_NAME)?.value;
                                                         if (!token) return null;
+
                                                           try {
                                                               const { payload } = await jwtVerify(token, getSecret());
-                                                                  return {
-                                                                        userId: payload.userId as string,
-                                                                              name: payload.name as string,
-                                                                                    email: payload.email as string,
-                                                                                        };
-                                                                                          } catch {
-                                                                                              return null;
-                                                                                                }
-                                                                                                }
 
-                                                                                                export async function destroySession() {
-                                                                                                  const jar = await cookies();
-                                                                                                    jar.delete(COOKIE_NAME);
-                                                                                                    }
+                                                                  await connectDB();
+                                                                      const user = (await User.findById(payload.userId)
+                                                                            .select("name email tokenVersion")
+                                                                                  .lean()) as {
+                                                                                        _id: unknown;
+                                                                                              name: string;
+                                                                                                    email: string;
+                                                                                                          tokenVersion?: number;
+                                                                                                              } | null;
+
+                                                                                                                  // Account was deleted
+                                                                                                                      if (!user) return null;
+                                                                                                                          // Password was changed after this cookie was issued
+                                                                                                                              if ((user.tokenVersion ?? 0) !== Number(payload.v ?? 0)) return null;
+
+                                                                                                                                  return { userId: String(user._id), name: user.name, email: user.email };
+                                                                                                                                    } catch {
+                                                                                                                                        return null;
+                                                                                                                                          }
+                                                                                                                                          });
+
+                                                                                                                                          export async function destroySession() {
+                                                                                                                                            const jar = await cookies();
+                                                                                                                                              jar.delete(COOKIE_NAME);
+                                                                                                                                              }
