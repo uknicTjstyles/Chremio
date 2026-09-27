@@ -181,105 +181,151 @@ Variable| Description
 «⚠️ Never commit ".env.local" or expose your authentication secrets publicly.»
 
 ---
+
 📁 Project Structure
 
+The project follows a modular Next.js App Router structure:
+
 Chremio/
-│
 ├── app/
 │   ├── (auth)/
 │   │   ├── sign-in/
 │   │   └── sign-up/
-│   │
 │   ├── (app)/
 │   │   ├── dashboard/
 │   │   ├── transactions/
 │   │   ├── analytics/
 │   │   └── profile/
-│   │
 │   ├── api/
 │   │   ├── auth/
-│   │   │   ├── login/
-│   │   │   ├── logout/
-│   │   │   └── register/
-│   │   │
-│   │   ├── profile/
+│   │   ├── transactions/
 │   │   ├── summary/
-│   │   └── transactions/
-│   │
+│   │   └── profile/
 │   ├── layout.tsx
 │   └── page.tsx
-│
 ├── components/
-│   ├── charts/
-│   ├── forms/
-│   ├── layout/
-│   └── ui/
-│
 ├── lib/
-│   ├── database/
-│   ├── auth/
-│   └── utils/
-│
 ├── models/
-│   ├── User.ts
-│   └── Transaction.ts
-│
 ├── public/
-│   └── brand/
-│
 ├── docs/
 │   └── screenshots/
-│       ├── dashboard.jpg
-│       ├── transactions.jpg
-│       ├── analytics.jpg
-│       └── mobile-menu.png
-│
 ├── .env.example
 ├── .gitignore
-├── next.config.ts
 ├── package.json
-├── postcss.config.mjs
 ├── tsconfig.json
 └── README.md
 
 ---
 
-🔌 API Reference
+🔌 API Documentation
 
-All protected routes require an authenticated user session.
+Chremio uses REST API routes to handle authentication, transactions, financial summaries, and user profile management.
 
 Authentication
 
-Method| Route| Description
-"POST"| "/api/auth/register"| Create a new account
-"POST"| "/api/auth/login"| Sign in
-"POST"| "/api/auth/logout"| Sign out
+Method| Endpoint| Description
+"POST"| "/api/auth/register"| Create a new user account
+"POST"| "/api/auth/login"| Authenticate a user
+"POST"| "/api/auth/logout"| End the current session
 
 Transactions
 
-Method| Route| Description
-"GET"| "/api/transactions"| Retrieve transactions
-"POST"| "/api/transactions"| Create a transaction
-"PUT"| "/api/transactions/:id"| Update a transaction
+Method| Endpoint| Description
+"GET"| "/api/transactions"| Retrieve the user's transactions
+"POST"| "/api/transactions"| Create a new transaction
+"PUT"| "/api/transactions/:id"| Update an existing transaction
 "DELETE"| "/api/transactions/:id"| Delete a transaction
 
-The transactions endpoint supports filters such as:
+The transactions endpoint supports filtering and searching:
 
-?q=food
-&type=expense
-&category=Food
+/api/transactions?q=food
+/api/transactions?type=expense
+/api/transactions?category=Food
 
-Summary & Analytics
+Financial Summary
 
-Method| Route| Description
-"GET"| "/api/summary"| Retrieve balance, monthly totals, category data and chart data
+Method| Endpoint| Description
+"GET"| "/api/summary"| Retrieve balance, income, spending, category and monthly analytics data
 
 Profile
 
-Method| Route| Description
-"PATCH"| "/api/profile"| Update account name
-"PUT"| "/api/profile/password"| Change password and invalidate existing sessions
-"DELETE"| "/api/profile"| Delete account and associated transactions
+Method| Endpoint| Description
+"PATCH"| "/api/profile"| Update the user's name
+"PUT"| "/api/profile/password"| Change the user's password
+"DELETE"| "/api/profile"| Delete the user's account and transactions
+
+«🔒 Authentication: Protected endpoints require an active authenticated session. Users can only access and modify their own financial records.»
+
+---
+
+🛡️ Security
+
+Chremio takes several measures to protect user accounts and financial information:
+
+- Passwords are hashed using "bcrypt"
+- Passwords are never stored as plain text
+- Authentication uses signed "httpOnly" cookies
+- Transaction queries are scoped to the authenticated user's ID
+- Users cannot access another user's financial records
+- Changing a password invalidates previous sessions
+- Deleting an account also removes its associated transactions
+- Sensitive credentials are stored in environment variables
+- Environment files containing secrets are excluded from Git
+
+---
+
+🚀 Deployment
+
+Chremio is deployed on Vercel.
+
+To deploy your own instance:
+
+1. Fork or clone the repository.
+2. Import the project into Vercel.
+3. Add the required environment variables.
+4. Configure your MongoDB Atlas connection.
+5. Deploy the application.
+
+Required Environment Variables
+
+MONGODB_URI=your_mongodb_connection_string
+AUTH_SECRET=your_secret_key
+
+Once connected to GitHub, new commits pushed to the configured production branch can be automatically deployed by Vercel.
+
+
+### Why this is better
+
+On GitHub, it will display approximately like:
+
+**📁 Project Structure**
+
+```text
+Chremio/
+├── app/
+│   ├── (auth)/
+│   ├── (app)/
+│   ├── api/
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+├── lib/
+├── models/
+├── public/
+├── docs/
+├── package.json
+└── README.md
+
+Then:
+
+🔌 API Documentation
+
+Method| Endpoint| Description
+POST| "/api/auth/register"| Create a new user account
+POST| "/api/auth/login"| Authenticate a user
+GET| "/api/transactions"| Retrieve transactions
+
+So there are no "id="..."" attributes, no strange formatting, and no unnecessary indentation. GitHub will render the Markdown naturally.
 
 ---
 
