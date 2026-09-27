@@ -39,9 +39,9 @@ Built as **Task 3 (Expense Tracker Web Application)** of the Full Stack Developm
 
     **Accounts and security**
     - Sign up and sign in with email and password
-    - Passwords are hashed with bcrypt; sessions use signed, httpOnly cookies
+    - Passwords hashed with bcrypt; sessions use signed, httpOnly cookies
     - Changing your password signs you out on every device
-    - Profile page to update your name, change your password, or delete your account (which also removes your transactions)
+    - Profile page to update your name, change your password, or delete your account (also removes your transactions)
 
     **Transactions**
     - Add, edit and delete income and expense records
@@ -76,10 +76,10 @@ Built as **Task 3 (Expense Tracker Web Application)** of the Full Stack Developm
 
     | Area | Technology |
     |---|---|
-    | Framework | Next.js (App Router) with React and TypeScript |
+    | Framework | Next.js (App Router), React, TypeScript |
     | Styling | Tailwind CSS |
     | Database | MongoDB Atlas with Mongoose |
-    | Authentication | jose (signed JWT cookies) and bcryptjs |
+    | Authentication | jose (signed JWT cookies), bcryptjs |
     | Charts | Recharts |
     | Notifications | react-toastify |
     | Hosting | Vercel |
@@ -92,39 +92,39 @@ Built as **Task 3 (Expense Tracker Web Application)** of the Full Stack Developm
 
     ### Setup
 
-    ```bash
+    \`\`\`bash
     git clone https://github.com/uknicTjstyles/Chremio.git
-    cd chremio
+    cd Chremio
     npm install
-    ```
+    \`\`\`
 
     Create a `.env.local` file in the project root (see `.env.example`):
 
-    ```
+    \`\`\`
     MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/chremio?retryWrites=true&w=majority
     AUTH_SECRET=<a long random string>
-    ```
+    \`\`\`
 
     Generate a secret with:
 
-    ```bash
+    \`\`\`bash
     openssl rand -base64 32
-    ```
+    \`\`\`
 
     Start the development server:
 
-    ```bash
+    \`\`\`bash
     npm run dev
-    ```
+    \`\`\`
 
     Open http://localhost:3000.
 
     To check a production build:
 
-    ```bash
+    \`\`\`bash
     npm run build
     npm start
-    ```
+    \`\`\`
 
     ### Environment variables
 
@@ -135,7 +135,7 @@ Built as **Task 3 (Expense Tracker Web Application)** of the Full Stack Developm
 
     ## Project structure
 
-    ```
+    \`\`\`
     app/
     ├─ (auth)/            sign-in and sign-up pages
     ├─ (app)/             signed-in pages with the sidebar shell
@@ -149,8 +149,8 @@ Built as **Task 3 (Expense Tracker Web Application)** of the Full Stack Developm
     components/           UI components (forms, charts, shell)
     lib/                  database connection, session, helpers
     models/               Mongoose models (User, Transaction)
-    
-    ```
+    public/brand/         logos
+    \`\`\`
 
     ## API reference
 
@@ -174,13 +174,13 @@ Built as **Task 3 (Expense Tracker Web Application)** of the Full Stack Developm
 
     - Passwords are hashed with bcrypt and never stored in plain text.
     - Session cookies are httpOnly, so page scripts cannot read them.
-    - Every transaction query is scoped to the signed-in user's ID, so users can only see and change their own data.
-    - Each session carries a version number tied to the account. Changing the password invalidates all older sessions, and deleting the account invalidates them too.
+    - Every transaction query is scoped to the signed-in user's ID.
+    - Each session carries a version number tied to the account. Changing the password invalidates all older sessions; deleting the account does too.
     - Secrets live in environment variables and are never committed.
 
     ## Deployment
 
-    The app is deployed on Vercel:
+    Deployed on Vercel:
 
     1. Import the GitHub repository on Vercel.
     2. Add `MONGODB_URI` and `AUTH_SECRET` as environment variables.
