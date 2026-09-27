@@ -1,4 +1,4 @@
-#Chremio
+CHREMIO
 
 «Manage your money. Build your future.»
 
@@ -181,7 +181,6 @@ Variable| Description
 «⚠️ Never commit ".env.local" or expose your authentication secrets publicly.»
 
 ---
-
 📁 Project Structure
 
 Chremio/
@@ -199,33 +198,48 @@ Chremio/
 │   │
 │   ├── api/
 │   │   ├── auth/
-│   │   ├── transactions/
+│   │   │   ├── login/
+│   │   │   ├── logout/
+│   │   │   └── register/
+│   │   │
+│   │   ├── profile/
 │   │   ├── summary/
-│   │   └── profile/
+│   │   └── transactions/
 │   │
 │   ├── layout.tsx
 │   └── page.tsx
 │
 ├── components/
-│   └── UI components, forms, charts and application shell
+│   ├── charts/
+│   ├── forms/
+│   ├── layout/
+│   └── ui/
 │
 ├── lib/
-│   └── Database connection, authentication and helper functions
+│   ├── database/
+│   ├── auth/
+│   └── utils/
 │
 ├── models/
-│   ├── User
-│   └── Transaction
+│   ├── User.ts
+│   └── Transaction.ts
 │
 ├── public/
 │   └── brand/
-│       └── logos
 │
 ├── docs/
 │   └── screenshots/
+│       ├── dashboard.jpg
+│       ├── transactions.jpg
+│       ├── analytics.jpg
+│       └── mobile-menu.png
 │
 ├── .env.example
 ├── .gitignore
+├── next.config.ts
 ├── package.json
+├── postcss.config.mjs
+├── tsconfig.json
 └── README.md
 
 ---
