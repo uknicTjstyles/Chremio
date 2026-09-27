@@ -1,6 +1,6 @@
 CHREMIO
 
-«Manage your money. Build your future.»
+Manage your money. Build your future.
 
 Chremio is a full-stack personal finance tracker designed to help users manage their income, expenses, and overall financial activity from one place.
 
@@ -178,29 +178,17 @@ Variable| Description
 "MONGODB_URI"| MongoDB Atlas connection string, including the "chremio" database
 "AUTH_SECRET"| Secret used to sign and validate user sessions
 
-«⚠️ Never commit ".env.local" or expose your authentication secrets publicly.»
-
+⚠️ Never commit ".env.local" or expose your authentication secrets publicly.
 ---
 
-📁 Project Structure
+**📁 Project Structure**
 
-The project follows a modular Next.js App Router structure:
-
+```text
 Chremio/
 ├── app/
 │   ├── (auth)/
-│   │   ├── sign-in/
-│   │   └── sign-up/
 │   ├── (app)/
-│   │   ├── dashboard/
-│   │   ├── transactions/
-│   │   ├── analytics/
-│   │   └── profile/
 │   ├── api/
-│   │   ├── auth/
-│   │   ├── transactions/
-│   │   ├── summary/
-│   │   └── profile/
 │   ├── layout.tsx
 │   └── page.tsx
 ├── components/
@@ -208,14 +196,10 @@ Chremio/
 ├── models/
 ├── public/
 ├── docs/
-│   └── screenshots/
-├── .env.example
-├── .gitignore
 ├── package.json
-├── tsconfig.json
 └── README.md
 
----
+
 
 🔌 API Documentation
 
@@ -254,23 +238,25 @@ Method| Endpoint| Description
 "PUT"| "/api/profile/password"| Change the user's password
 "DELETE"| "/api/profile"| Delete the user's account and transactions
 
-«🔒 Authentication: Protected endpoints require an active authenticated session. Users can only access and modify their own financial records.»
+🔒 Authentication: Protected endpoints require an active authenticated session. Users can only access and modify their own financial records.
+
 
 ---
 
 🛡️ Security
 
-Chremio takes several measures to protect user accounts and financial information:
+Chremio implements several security measures to protect user accounts and financial data:
 
 - Passwords are hashed using "bcrypt"
-- Passwords are never stored as plain text
-- Authentication uses signed "httpOnly" cookies
-- Transaction queries are scoped to the authenticated user's ID
-- Users cannot access another user's financial records
-- Changing a password invalidates previous sessions
-- Deleting an account also removes its associated transactions
-- Sensitive credentials are stored in environment variables
-- Environment files containing secrets are excluded from Git
+- Passwords are never stored in plain text
+- Authentication cookies use the "httpOnly" flag
+- Transactions are scoped to the authenticated user's account
+- Users cannot access another user's transactions
+- Session versions are tied to user accounts
+- Changing a password invalidates older sessions
+- Deleting an account also invalidates its sessions
+- Sensitive configuration values are stored in environment variables
+- Secrets are excluded from version control
 
 ---
 
@@ -292,74 +278,6 @@ MONGODB_URI=your_mongodb_connection_string
 AUTH_SECRET=your_secret_key
 
 Once connected to GitHub, new commits pushed to the configured production branch can be automatically deployed by Vercel.
-
-
-### Why this is better
-
-On GitHub, it will display approximately like:
-
-**📁 Project Structure**
-
-```text
-Chremio/
-├── app/
-│   ├── (auth)/
-│   ├── (app)/
-│   ├── api/
-│   ├── layout.tsx
-│   └── page.tsx
-├── components/
-├── lib/
-├── models/
-├── public/
-├── docs/
-├── package.json
-└── README.md
-
-Then:
-
-🔌 API Documentation
-
-Method| Endpoint| Description
-POST| "/api/auth/register"| Create a new user account
-POST| "/api/auth/login"| Authenticate a user
-GET| "/api/transactions"| Retrieve transactions
-
-So there are no "id="..."" attributes, no strange formatting, and no unnecessary indentation. GitHub will render the Markdown naturally.
-
----
-
-🛡️ Security
-
-Chremio implements several security measures to protect user accounts and financial data:
-
-- Passwords are hashed using "bcrypt"
-- Passwords are never stored in plain text
-- Authentication cookies use the "httpOnly" flag
-- Transactions are scoped to the authenticated user's account
-- Users cannot access another user's transactions
-- Session versions are tied to user accounts
-- Changing a password invalidates older sessions
-- Deleting an account also invalidates its sessions
-- Sensitive configuration values are stored in environment variables
-- Secrets are excluded from version control
-
----
-
-☁️ Deployment
-
-Chremio is deployed using Vercel.
-
-Deploying Your Own Instance
-
-1. Import the GitHub repository into Vercel.
-2. Add the required environment variables:
-   - "MONGODB_URI"
-   - "AUTH_SECRET"
-3. Configure MongoDB Atlas network access so your deployment can connect to the database.
-4. Deploy the application.
-
-After deployment, pushes to the configured production branch can trigger automatic deployments through Vercel.
 
 ---
 
@@ -383,16 +301,6 @@ Tehillah Eneye Jamgbadi
 
 Computer Engineering
 Full Stack Development Intern — Auspify Technologies
-
----
-
-🔗 Links
-
-Live Application:
-https://chremio.vercel.app/
-
-GitHub Repository:
-https://github.com/uknicTjstyles/Chremio
 
 ---
 
