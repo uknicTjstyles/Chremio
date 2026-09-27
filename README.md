@@ -1,200 +1,341 @@
-# Chremio
+#Chremio
 
-> Manage your money. Build your future.
+«Manage your money. Build your future.»
 
-Chremio is a full-stack personal finance tracker. Users create an account, record income and spending, and see where their money goes through a dashboard and charts.
+Chremio is a full-stack personal finance tracker designed to help users manage their income, expenses, and overall financial activity from one place.
 
-Built as **Task 3 (Expense Tracker Web Application)** of the Full Stack Development Internship at **Auspify Technologies**.
+Users can create an account, record income and expenses, monitor their balance, and understand their spending habits through interactive dashboards and analytics.
 
-- **Live demo:** https://chremio.vercel.app/
-- **Repository:** https://github.com/uknicTjstyles/Chremio
+Built as Task 3 — Expense Tracker Web Application for the Full Stack Development Internship at Auspify Technologies.
 
-## Screenshots
+<p align="center">
+  <a href="https://chremio.vercel.app/">
+    <strong>🚀 View Live Demo</strong>
+  </a>
+  &nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="https://github.com/uknicTjstyles/Chremio">
+    <strong>💻 View Repository</strong>
+  </a>
+</p>---
 
-| Dashboard | Transactions |
-|---|---|
-| 
+📸 Screenshots
 
-![Dashboard](docs/screenshots/dashboard.jpg)
+Dashboard
 
- | 
+<p align="center">
+  <img src="docs/screenshots/dashboard.jpg" alt="Chremio Dashboard" width="850">
+</p>Transactions
 
- ![Transactions](docs/screenshots/transactions.jpg)
+<p align="center">
+  <img src="docs/screenshots/transactions.jpg" alt="Chremio Transactions" width="850">
+</p>Analytics
 
-  |
+<p align="center">
+  <img src="docs/screenshots/analytics.jpg" alt="Chremio Analytics" width="850">
+</p>Mobile Menu
 
-  | Analytics | Mobile menu |
-  |---|---|
-  | 
+<p align="center">
+  <img src="docs/screenshots/mobile-menu.png" alt="Chremio Mobile Menu" width="350">
+</p>---
 
-  ![Analytics](docs/screenshots/analytics.jpg)
+✨ Features
 
-   | 
+🔐 Accounts & Security
 
-   ![Mobile menu](docs/screenshots/mobile-menu.png)
+- Sign up and sign in with email and password
+- Passwords securely hashed with "bcrypt"
+- Signed "httpOnly" session cookies
+- Password changes automatically invalidate existing sessions
+- Profile management
+- Update account name
+- Change password
+- Delete account and associated transactions
 
-    |
+💰 Transaction Management
 
-    ## Features
+- Add income and expense records
+- Edit existing transactions
+- Delete transactions
+- Transaction categories
+- Descriptions and dates
+- Search transactions
+- Filter by transaction type
+- Filter by category
+- View total income
+- View total spending
+- View current net balance
 
-    **Accounts and security**
-    - Sign up and sign in with email and password
-    - Passwords hashed with bcrypt; sessions use signed, httpOnly cookies
-    - Changing your password signs you out on every device
-    - Profile page to update your name, change your password, or delete your account (also removes your transactions)
+📊 Dashboard & Analytics
 
-    **Transactions**
-    - Add, edit and delete income and expense records
-    - Categories, descriptions and dates
-    - Search and filter by type or category
-    - Totals for income, spending and net balance
+- Current total balance
+- Monthly income
+- Monthly spending
+- Recent transactions
+- Spending-by-category donut chart
+- Six-month income vs. spending chart
+- Savings rate
+- Average monthly spending
+- Category breakdown
+- Dedicated analytics dashboard
 
-    **Dashboard and reports**
-    - Total balance, plus income and spending for the current month
-    - Spending-by-category donut chart
-    - Recent transactions
-    - Analytics page: 6-month income vs spending chart, savings rate, average monthly spending, and a category breakdown
+🎨 User Experience
 
-    **Experience**
-    - Dark theme with a consistent brand identity
-    - Fully responsive: sidebar on desktop, hamburger menu on phones
-    - Toast notifications for every success and error
-    - Page-loading progress bar and spinner
-    - Icons on all inputs, with show/hide on password fields
+- Modern dark-themed interface
+- Consistent Chremio brand identity
+- Fully responsive design
+- Desktop sidebar navigation
+- Mobile hamburger menu
+- Toast notifications for success and error states
+- Page-loading progress bar
+- Loading spinners
+- Input icons
+- Show/hide password functionality
 
-    ## Task requirements
+---
 
-    | Requirement (Task 3) | How it is met |
-    |---|---|
-    | Design dashboard screens | Dashboard, Transactions, Analytics and Profile pages |
-    | Create expense management APIs | REST API routes for transactions, summary and profile |
-    | Store financial records in a database | MongoDB Atlas via Mongoose |
-    | Display reports and summaries | Dashboard cards and charts, plus the Analytics page |
-    | Implement authentication | Email and password auth with session cookies |
+📋 Task Requirements
 
-    ## Tech stack
+Requirement| Implementation
+Design dashboard screens| Dashboard, Transactions, Analytics and Profile pages
+Create expense management APIs| REST API routes for transactions, summary and profile
+Store financial records in a database| MongoDB Atlas with Mongoose
+Display reports and summaries| Dashboard cards, charts and Analytics page
+Implement authentication| Email/password authentication with session cookies
 
-    | Area | Technology |
-    |---|---|
-    | Framework | Next.js (App Router), React, TypeScript |
-    | Styling | Tailwind CSS |
-    | Database | MongoDB Atlas with Mongoose |
-    | Authentication | jose (signed JWT cookies), bcryptjs |
-    | Charts | Recharts |
-    | Notifications | react-toastify |
-    | Hosting | Vercel |
+---
 
-    ## Getting started
+🛠️ Tech Stack
 
-    ### Prerequisites
-    - Node.js 20.9 or newer
-    - A free [MongoDB Atlas](https://www.mongodb.com/atlas) cluster
+Area| Technology
+Framework| Next.js (App Router)
+Frontend| React
+Language| TypeScript
+Styling| Tailwind CSS
+Database| MongoDB Atlas
+ODM| Mongoose
+Authentication| "jose" + signed JWT cookies
+Password Hashing| "bcryptjs"
+Charts| Recharts
+Notifications| React Toastify
+Deployment| Vercel
 
-    ### Setup
+---
 
-    \`\`\`bash
-    git clone https://github.com/uknicTjstyles/Chremio.git
-    cd Chremio
-    npm install
-    \`\`\`
+🚀 Getting Started
 
-    Create a `.env.local` file in the project root (see `.env.example`):
+Prerequisites
 
-    \`\`\`
-    MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/chremio?retryWrites=true&w=majority
-    AUTH_SECRET=<a long random string>
-    \`\`\`
+Before running Chremio locally, make sure you have:
 
-    Generate a secret with:
+- Node.js 20.9 or newer
+- A MongoDB Atlas account and cluster
+- Git
 
-    \`\`\`bash
-    openssl rand -base64 32
-    \`\`\`
+1. Clone the Repository
 
-    Start the development server:
+git clone https://github.com/uknicTjstyles/Chremio.git
+cd Chremio
 
-    \`\`\`bash
-    npm run dev
-    \`\`\`
+2. Install Dependencies
 
-    Open http://localhost:3000.
+npm install
 
-    To check a production build:
+3. Configure Environment Variables
 
-    \`\`\`bash
-    npm run build
-    npm start
-    \`\`\`
+Create a ".env.local" file in the root of the project:
 
-    ### Environment variables
+MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/chremio?retryWrites=true&w=majority
+AUTH_SECRET=<your-long-random-secret>
 
-    | Variable | Description |
-    |---|---|
-    | `MONGODB_URI` | MongoDB Atlas connection string, including the database name (`/chremio`) |
-    | `AUTH_SECRET` | Secret used to sign session cookies. Keep it private. |
+You can use ".env.example" as a reference if it is included in the repository.
 
-    ## Project structure
+4. Generate an Authentication Secret
 
-    \`\`\`
-    app/
-    ├─ (auth)/            sign-in and sign-up pages
-    ├─ (app)/             signed-in pages with the sidebar shell
-    │  ├─ dashboard/
-    │  ├─ transactions/
-    │  ├─ analytics/
-    │  └─ profile/
-    ├─ api/               REST API routes
-    ├─ layout.tsx         root layout, toasts, loading bar
-    └─ page.tsx           landing page
-    components/           UI components (forms, charts, shell)
-    lib/                  database connection, session, helpers
-    models/               Mongoose models (User, Transaction)
-    public/brand/         logos
-    \`\`\`
+You can generate a secure secret using:
 
-    ## API reference
+openssl rand -base64 32
 
-    All routes except register and login require a signed-in session.
+Copy the generated value into "AUTH_SECRET".
 
-    | Method | Route | Description |
-    |---|---|---|
-    | POST | `/api/auth/register` | Create an account |
-    | POST | `/api/auth/login` | Sign in |
-    | POST | `/api/auth/logout` | Sign out |
-    | GET | `/api/transactions` | List transactions (`q`, `type`, `category` filters) |
-    | POST | `/api/transactions` | Add a transaction |
-    | PUT | `/api/transactions/:id` | Update a transaction |
-    | DELETE | `/api/transactions/:id` | Delete a transaction |
-    | GET | `/api/summary` | Balance, monthly totals, category and monthly chart data |
-    | PATCH | `/api/profile` | Update name |
-    | PUT | `/api/profile/password` | Change password (signs out all devices) |
-    | DELETE | `/api/profile` | Delete account and all its transactions |
+5. Start the Development Server
 
-    ## Security notes
+npm run dev
 
-    - Passwords are hashed with bcrypt and never stored in plain text.
-    - Session cookies are httpOnly, so page scripts cannot read them.
-    - Every transaction query is scoped to the signed-in user's ID.
-    - Each session carries a version number tied to the account. Changing the password invalidates all older sessions; deleting the account does too.
-    - Secrets live in environment variables and are never committed.
+Then open:
 
-    ## Deployment
+http://localhost:3000
 
-    Deployed on Vercel:
+6. Test the Production Build
 
-    1. Import the GitHub repository on Vercel.
-    2. Add `MONGODB_URI` and `AUTH_SECRET` as environment variables.
-    3. In MongoDB Atlas, allow network access from `0.0.0.0/0` so Vercel can connect.
-    4. Deploy. Every push to `main` redeploys automatically.
+npm run build
+npm start
 
-    ## Possible improvements
+---
 
-    - Monthly budgets with progress tracking
-    - Savings goals
-    - CSV export of transactions
-    - Recurring transactions
+🔑 Environment Variables
 
-    ## Author
+Variable| Description
+"MONGODB_URI"| MongoDB Atlas connection string, including the "chremio" database
+"AUTH_SECRET"| Secret used to sign and validate user sessions
 
-    **Tehillah Eneye Jamgbadi**
-    Full Stack Development Intern, Auspify Technologies
+«⚠️ Never commit ".env.local" or expose your authentication secrets publicly.»
+
+---
+
+📁 Project Structure
+
+Chremio/
+│
+├── app/
+│   ├── (auth)/
+│   │   ├── sign-in/
+│   │   └── sign-up/
+│   │
+│   ├── (app)/
+│   │   ├── dashboard/
+│   │   ├── transactions/
+│   │   ├── analytics/
+│   │   └── profile/
+│   │
+│   ├── api/
+│   │   ├── auth/
+│   │   ├── transactions/
+│   │   ├── summary/
+│   │   └── profile/
+│   │
+│   ├── layout.tsx
+│   └── page.tsx
+│
+├── components/
+│   └── UI components, forms, charts and application shell
+│
+├── lib/
+│   └── Database connection, authentication and helper functions
+│
+├── models/
+│   ├── User
+│   └── Transaction
+│
+├── public/
+│   └── brand/
+│       └── logos
+│
+├── docs/
+│   └── screenshots/
+│
+├── .env.example
+├── .gitignore
+├── package.json
+└── README.md
+
+---
+
+🔌 API Reference
+
+All protected routes require an authenticated user session.
+
+Authentication
+
+Method| Route| Description
+"POST"| "/api/auth/register"| Create a new account
+"POST"| "/api/auth/login"| Sign in
+"POST"| "/api/auth/logout"| Sign out
+
+Transactions
+
+Method| Route| Description
+"GET"| "/api/transactions"| Retrieve transactions
+"POST"| "/api/transactions"| Create a transaction
+"PUT"| "/api/transactions/:id"| Update a transaction
+"DELETE"| "/api/transactions/:id"| Delete a transaction
+
+The transactions endpoint supports filters such as:
+
+?q=food
+&type=expense
+&category=Food
+
+Summary & Analytics
+
+Method| Route| Description
+"GET"| "/api/summary"| Retrieve balance, monthly totals, category data and chart data
+
+Profile
+
+Method| Route| Description
+"PATCH"| "/api/profile"| Update account name
+"PUT"| "/api/profile/password"| Change password and invalidate existing sessions
+"DELETE"| "/api/profile"| Delete account and associated transactions
+
+---
+
+🛡️ Security
+
+Chremio implements several security measures to protect user accounts and financial data:
+
+- Passwords are hashed using "bcrypt"
+- Passwords are never stored in plain text
+- Authentication cookies use the "httpOnly" flag
+- Transactions are scoped to the authenticated user's account
+- Users cannot access another user's transactions
+- Session versions are tied to user accounts
+- Changing a password invalidates older sessions
+- Deleting an account also invalidates its sessions
+- Sensitive configuration values are stored in environment variables
+- Secrets are excluded from version control
+
+---
+
+☁️ Deployment
+
+Chremio is deployed using Vercel.
+
+Deploying Your Own Instance
+
+1. Import the GitHub repository into Vercel.
+2. Add the required environment variables:
+   - "MONGODB_URI"
+   - "AUTH_SECRET"
+3. Configure MongoDB Atlas network access so your deployment can connect to the database.
+4. Deploy the application.
+
+After deployment, pushes to the configured production branch can trigger automatic deployments through Vercel.
+
+---
+
+🔮 Future Improvements
+
+Some planned improvements include:
+
+- [ ] Monthly budgets with progress tracking
+- [ ] Savings goals
+- [ ] CSV transaction export
+- [ ] Recurring transactions
+- [ ] More detailed financial reports
+- [ ] Improved financial insights
+- [ ] Additional chart visualizations
+
+---
+
+👨‍💻 Author
+
+Tehillah Eneye Jamgbadi
+
+Computer Engineering
+Full Stack Development Intern — Auspify Technologies
+
+---
+
+🔗 Links
+
+Live Application:
+https://chremio.vercel.app/
+
+GitHub Repository:
+https://github.com/uknicTjstyles/Chremio
+
+---
+
+<p align="center">
+  Built with ❤️ using Next.js, TypeScript, MongoDB and Tailwind CSS.
+</p>
